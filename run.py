@@ -56,25 +56,26 @@ def validate_data(values):
 
     return True
 
+'''
+def update_sales_worksheet(data):
+    '''"""
+    Update sames worksheet, add new row with the list data provided.
+    '''
+    print("Updating sales worksheet...\n")
+    sales_worksheet = SHEET.worksheet("sales")
+    sales_worksheet.append_row(data)
+    print("Sales worksheet updated sucessfully.\n")
 
-#def update_sales_worksheet(data):
-   # '''
-   # Update sames worksheet, add new row with the list data provided.
-   # '''
-   # print("Updating sales worksheet...\n")
-    #sales_worksheet = SHEET.worksheet("sales")
-    #sales_worksheet.append_row(data)
-   # print("Sales worksheet updated sucessfully.\n")
 
-
-#def update_surplus_worksheet(new_surplus_data):
-   ### '''
-    #Update surplus worksheet, add new row with the list data provided.
-    #'''
-    #print("Updating surplus worksheet...\n")
-    #surplus_worksheet = SHEET.worksheet("surplus")
-    #surplus_worksheet.append_row(new_surplus_data)
-    #print("Surplus worksheet updated sucessfully.\n")
+def update_surplus_worksheet(new_surplus_data):
+    """'''"""
+    Update surplus worksheet, add new row with the list data provided.
+    '''"""
+    print("Updating surplus worksheet...\n")
+    surplus_worksheet = SHEET.worksheet("surplus")
+    surplus_worksheet.append_row(new_surplus_data)
+    print("Surplus worksheet updated sucessfully.\n")
+'''"""
 
 
 def update_worksheet(data, worksheet):
@@ -86,7 +87,6 @@ def update_worksheet(data, worksheet):
     worksheet_to_update = SHEET.worksheet(worksheet)
     worksheet_to_update.append_row(data)
     print(f"{worksheet} worksheet updated sucessfully")
-
 
 
 def calculate_surplus_data(sales_row):
@@ -109,6 +109,23 @@ def calculate_surplus_data(sales_row):
     return surplus_data
 
 
+def get_last_5_entries_sales():
+    '''
+    Collects columns of data from sales worksheet, collecting
+    the alst 5 entries for each sandwich and returns the dat
+    as a list of lists
+    '''
+    sales = SHEET.worksheet("sales")
+    # column = sales.col_values(3)
+    # print(column)
+
+    columns = []
+    for ind in range(1, 7):
+        column = sales.col_values(ind)
+        columns.append(column[-5:])
+    
+    return columns
+
 def main():
     '''
     Run all program functions
@@ -121,4 +138,6 @@ def main():
 
 
 print("Welcome to Love Sandwiches Data Automation")
-main()
+# main()
+
+sales_columns = get_last_5_entries_sales()
