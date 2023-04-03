@@ -1,3 +1,6 @@
+'''
+docsting for importing gspread module
+'''
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -53,4 +56,16 @@ def validate_data(values):
     return True
 
 
+def update_sales_worksheet(data):
+    '''
+    Update sames worksheet, add new row with the list data provided.
+    '''
+    print("Updating sales worksheet...\n")
+    sales_worksheet = SHEET.worksheet("sales")
+    sales_worksheet.append_row(data)
+    print("Sales worksheet updated sucesffuly.\n")
+
+
 data = get_sales_data()
+sales_data = [int(num) for num in data]
+update_sales_worksheet(sales_data)
